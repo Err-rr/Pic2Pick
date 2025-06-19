@@ -1,0 +1,21 @@
+# Ignore virtual environment
+venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Streamlit temp files
+.streamlit/
+
+# Ignore hidden OS files
+*.log
+*.bak
+*.tmp
