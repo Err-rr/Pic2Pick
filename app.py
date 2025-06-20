@@ -2,12 +2,16 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import streamlit as st
+from components.navbar import render_navbar
+from components.footer import render_footer
 from PIL import Image
 import os
 import numpy as np
 import torch
 import clip
 import faiss
+
+render_navbar()
 
 # Set page config
 st.set_page_config(
@@ -214,3 +218,5 @@ else:
             if i < min(4, len(image_paths)):  # Show max 4 samples
                 with col:
                     st.image(image_paths[i], caption=f"Product {i+1}", width=120)
+
+render_footer()                    
