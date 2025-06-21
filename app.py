@@ -31,13 +31,40 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
     
+    /* COMPLETE HORIZONTAL SCROLL PREVENTION */
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+    }
+    
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+    
+    .stApp, .stApp > div, .main, .main > div {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
 
 /* Main app background with animated grid */
 .stApp {
     background: #0a0a0a;
     font-family: 'Inter', sans-serif;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
 }
 
 /* Animated grid background */
@@ -93,14 +120,16 @@ st.markdown("""
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding-left: 1rem; /* Reduced from 1.5rem to increase width */
+        padding-right: 1rem; /* Reduced from 1.5rem to increase width */
         background: rgba(15, 15, 15, 0.85);
         backdrop-filter: blur(10px);
         border-radius: 20px;
         margin-top: 1rem;
         border: 1px solid rgba(255, 255, 255, 0.08);
         animation: containerFloat 10s ease-in-out infinite;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     @keyframes containerFloat {
@@ -182,14 +211,14 @@ st.markdown("""
         background: #000000 !important;
         border: 2px dashed rgba(59, 130, 246, 0.4);
         border-radius: 15px;
-        padding: 2rem 3rem; /* Increased horizontal padding from 2rem to 3rem */
+        padding: 2rem;
         text-align: center;
-        margin: 2.5rem 0;
+        margin: 2.5rem -1rem; /* Negative margin to extend beyond container padding */
         transition: all 0.3s ease;
         animation: uploadPulse 4s ease-in-out infinite;
-        width: calc(100% + 2cm); /* Increased width by 1cm on each side */
-        margin-left: -1cm; /* Center the wider box */
-        margin-right: -1cm;
+        width: calc(100% + 2rem) !important; /* Compensate for negative margin */
+        max-width: calc(100% + 2rem) !important;
+        box-sizing: border-box !important;
     }
     
     @keyframes uploadPulse {
@@ -222,15 +251,20 @@ st.markdown("""
     
     /* Enhanced spacing for columns - Better gaps between product boxes */
     .stColumns {
-        gap: 3rem !important;
+        gap: 2rem !important;
         margin: 3rem 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .stColumns > div {
-        padding: 0 1.5rem !important;
+        padding: 0 1rem !important;
+        max-width: calc(50% - 1rem) !important;
+        flex: 1 !important;
+        box-sizing: border-box !important;
     }
     
-    /* Product boxes with solid black background and improved spacing */
+    /* Product boxes with solid black background and REDUCED HOVER GLOW */
     .product-box {
         background: #000000 !important;
         border: 2px solid rgba(59, 130, 246, 0.2);
@@ -246,6 +280,9 @@ st.markdown("""
         animation: productFloat 6s ease-in-out infinite;
         position: relative;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     @keyframes productFloat {
@@ -256,8 +293,8 @@ st.markdown("""
     .product-box:hover {
         transform: translateY(-10px) scale(1.03);
         box-shadow: 
-            0 20px 50px rgba(59, 130, 246, 0.25),
-            0 0 30px rgba(59, 130, 246, 0.1);
+            0 15px 35px rgba(59, 130, 246, 0.15), /* Reduced from 0.25 */
+            0 0 20px rgba(59, 130, 246, 0.08); /* Reduced from 0.1 */
         border-color: rgba(59, 130, 246, 0.5);
         background: #111111 !important;
         animation-play-state: paused;
@@ -340,30 +377,31 @@ st.markdown("""
         transform: scale(1.05);
     }
     
+    /* SMALLER SHOP BUTTONS FOR RECOMMENDED PRODUCTS */
     .shop-buttons {
         display: flex;
-        gap: 1.5rem; /* INCREASED gap between Amazon and Flipkart buttons from 0.8rem to 1.5rem */
+        gap: 1rem; /* Reduced gap for smaller buttons */
         justify-content: center;
         margin-top: 1rem;
     }
     
-    /* Enhanced shop buttons */
+    /* Enhanced shop buttons - SMALLER SIZE FOR RECOMMENDED PRODUCTS */
     .shop-btn {
         color: white !important;
-        padding: 0.6rem 1.2rem;
-        border-radius: 12px;
+        padding: 0.4rem 0.8rem !important; /* REDUCED from 0.6rem 1.2rem */
+        border-radius: 8px !important; /* REDUCED from 12px */
         text-decoration: none !important;
-        font-size: 0.85rem;
+        font-size: 0.75rem !important; /* REDUCED from 0.85rem */
         font-weight: 600;
         transition: all 0.3s ease;
         border: none;
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.3rem !important; /* REDUCED from 0.4rem */
         position: relative;
         overflow: hidden;
-        min-width: 100px;
+        min-width: 80px !important; /* REDUCED from 100px */
         justify-content: center;
     }
     
@@ -408,9 +446,9 @@ st.markdown("""
         background: linear-gradient(135deg, #3080ff, #2570e8);
     }
     
-    /* Icon styling for buttons - Larger icons for sample product boxes */
+    /* Icon styling for buttons - SMALLER ICONS FOR RECOMMENDED PRODUCTS */
     .shop-btn i {
-        font-size: 1.2rem;
+        font-size: 1rem !important; /* REDUCED from 1.2rem */
         transition: transform 0.3s ease;
     }
     
@@ -434,6 +472,9 @@ st.markdown("""
         transition: all 0.3s ease;
         animation: previewFloat 8s ease-in-out infinite;
         margin-bottom: 2rem;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     @keyframes previewFloat {
@@ -479,13 +520,16 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
     }
     
-    /* Sample products styling - EQUAL HORIZONTAL AND VERTICAL GAPS */
+    /* Sample products styling - CONTAINED WITHIN VIEWPORT */
     .sample-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 2rem 2rem; /* MATCHED vertical and horizontal gaps to be equal */
+        gap: 2rem 2rem;
         margin-top: 3rem;
         margin-bottom: 3rem;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
     }
 
     /* Sample item styling with enhanced price and button spacing */
@@ -497,13 +541,16 @@ st.markdown("""
         text-align: center;
         transition: all 0.3s ease;
         animation: sampleFloat 7s ease-in-out infinite;
-        height: 300px; /* Increased height to accommodate larger price */
+        height: 300px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
         margin-bottom: 2rem;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     @keyframes sampleFloat {
@@ -562,39 +609,39 @@ st.markdown("""
     /* ENHANCED PRICE STYLING FOR SAMPLE PRODUCTS */
     .sample-item .price-tag {
         color: #fbbf24;
-        font-size: 1.3rem !important; /* INCREASED from 1.1rem to 1.3rem */
-        font-weight: 700 !important; /* INCREASED from 600 to 700 */
-        margin: 0.8rem 0 !important; /* INCREASED margin for better spacing */
+        font-size: 1.3rem !important;
+        font-weight: 700 !important;
+        margin: 0.8rem 0 !important;
         transition: all 0.3s ease;
-        text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3); /* Added text shadow for emphasis */
+        text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
     }
     
     .sample-item:hover .price-tag {
         color: #f59e0b;
-        transform: scale(1.08) !important; /* INCREASED scale on hover */
+        transform: scale(1.08) !important;
         text-shadow: 0 3px 6px rgba(245, 158, 11, 0.4);
     }
 
-    /* ENHANCED SAMPLE ITEM SHOP BUTTONS - INCREASED GAP */
+    /* SAMPLE ITEM SHOP BUTTONS - KEEP ORIGINAL SIZE FOR SAMPLE PRODUCTS */
     .sample-item .shop-buttons,
     .sample-product .shop-buttons {
         display: flex;
-        gap: 2.5rem !important; /* INCREASED gap significantly from 1.5rem to 2.5rem */
+        gap: 2.5rem !important;
         justify-content: center;
-        margin-top: 1rem !important; /* INCREASED margin top */
+        margin-top: 1rem !important;
     }
 
     /* Sample item icons - Enhanced for better visibility */
     .sample-item .fab,
     .sample-item .fas {
-        font-size: 1.5rem !important; /* INCREASED from 1.4rem to 1.5rem */
+        font-size: 1.5rem !important;
         transition: transform 0.3s ease;
-        padding: 0.3rem; /* Added padding for better click area */
+        padding: 0.3rem;
     }
 
     .sample-item:hover .fab,
     .sample-item:hover .fas {
-        transform: scale(1.15) rotate(3deg); /* Enhanced hover effect */
+        transform: scale(1.15) rotate(3deg);
     }
 
     /* Enhanced Amazon icon for sample products */
@@ -670,8 +717,9 @@ st.markdown("""
         /* Mobile adjustments for product boxes */
         .stColumns > div {
             width: 100% !important;
+            max-width: 100% !important;
             margin-bottom: 2.5rem;
-            padding: 0 0.5rem !important;
+            padding: 0 !important;
         }
         
         .stColumns {
@@ -700,13 +748,22 @@ st.markdown("""
         }
         
         .main .block-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: 0.5rem; /* Further reduced for mobile */
+            padding-right: 0.5rem; /* Further reduced for mobile */
         }
         
+        /* Mobile shop buttons for recommended products - SMALLER SIZE HORIZONTALLY */
         .shop-buttons {
             flex-direction: column;
-            gap: 0.8rem; /* Reduced gap for mobile vertical layout */
+            gap: 0.6rem !important; /* Reduced gap for mobile vertical layout */
+        }
+        
+        /* MOBILE RECOMMENDED PRODUCT BUTTONS - SMALLER HORIZONTALLY */
+        .shop-btn {
+            padding: 0.35rem 0.5rem !important; /* Reduced horizontal padding from 0.8rem to 0.5rem */
+            font-size: 0.7rem !important; /* Slightly smaller font */
+            min-width: 65px !important; /* Reduced from 80px */
+            gap: 0.2rem !important; /* Reduced gap between icon and text */
         }
         
         .product-header {
@@ -722,16 +779,16 @@ st.markdown("""
             font-size: 1.1rem !important;
         }
         
-        /* Mobile adjustments for sample items - MAINTAINED EQUAL GAPS */
+        /* Mobile adjustments for sample items */
         .sample-grid {
-            gap: 1.5rem 1.5rem; /* MAINTAINED equal vertical and horizontal gaps for mobile */
+            gap: 1.5rem 1.5rem;
             margin-top: 2rem;
             margin-bottom: 2rem;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         }
         
         .sample-item {
-            height: 260px; /* Adjusted height for mobile */
+            height: 260px;
             padding: 1rem;
         }
         
@@ -743,26 +800,26 @@ st.markdown("""
             font-size: 0.8rem;
         }
         
-        /* Mobile sample item price - MAINTAINED larger size */
+        /* Mobile sample item price */
         .sample-item .price-tag {
-            font-size: 1.1rem !important; /* Slightly smaller for mobile but still larger than original */
+            font-size: 1.1rem !important;
             margin: 0.6rem 0 !important;
         }
         
-        /* Mobile sample item shop buttons - MAINTAINED INCREASED GAP */
+        /* Mobile sample item shop buttons */
         .sample-item .shop-buttons {
-            gap: 2rem !important; /* MAINTAINED larger gap for mobile */
+            gap: 2rem !important;
         }
         
-        /* Mobile icon size adjustment - MAINTAINED larger size */
+        /* Mobile icon size adjustment for recommended products - SMALLER SIZE */
         .shop-btn i {
-            font-size: 1.1rem;
+            font-size: 0.8rem !important; /* Further reduced for mobile */
         }
 
-        /* Mobile sample item icons - MAINTAINED larger size */
+        /* Mobile sample item icons */
         .sample-item .fab,
         .sample-item .fas {
-            font-size: 1.3rem !important; /* Slightly smaller for mobile but still enhanced */
+            font-size: 1.3rem !important;
         }
 
         /* Mobile trends button */
@@ -771,12 +828,12 @@ st.markdown("""
             padding: 0.7rem 1.3rem;
         }
         
-        /* Mobile file uploader - Adjust for smaller screens */
+        /* Mobile file uploader - ADJUSTED FOR INCREASED WIDTH */
         .stFileUploader {
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-            padding: 2rem;
+            padding: 1.5rem;
+            margin: 2.5rem -0.5rem; /* Adjusted negative margin for mobile */
+            width: calc(100% + 1rem) !important; /* Adjusted width for mobile */
+            max-width: calc(100% + 1rem) !important;
         }
     }
     
