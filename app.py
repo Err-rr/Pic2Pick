@@ -31,45 +31,63 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
     
-    /* Main app background with image overlay */
-    .stApp {
-        background: 
-            linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-            url('https://i.pinimg.com/736x/bf/b9/6f/bfb96f612ae8729f5ef4ab999faec2f6.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        font-family: 'Inter', sans-serif;
-        animation: backgroundFloat 20s ease-in-out infinite;
-    }
-    
-    @keyframes backgroundFloat {
-        0%, 100% { background-position: center center; }
-        50% { background-position: center 10px; }
-    }
-    
-    /* Add teal green blur overlay on left side */
-    .stApp::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at 20% 50%, rgba(20, 184, 166, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 10% 30%, rgba(45, 212, 191, 0.25) 0%, transparent 40%),
-            radial-gradient(circle at 15% 70%, rgba(56, 178, 172, 0.2) 0%, transparent 35%);
-        filter: blur(100px);
-        z-index: -1;
-        pointer-events: none;
-        animation: blurFloat 15s ease-in-out infinite;
-    }
-    
-    @keyframes blurFloat {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 0.6; }
-    }
+
+/* Main app background with animated grid */
+.stApp {
+    background: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated grid background */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Subtle overlay for professional look */
+.stApp::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.12) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+    animation: subtleGlow 15s ease-in-out infinite;
+}
+
+@keyframes subtleGlow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* Ensure Streamlit content appears above background */
+.stApp > div {
+    position: relative;
+    z-index: 1;
+}
     
     /* Main container adjustments */
     .main .block-container {
@@ -77,17 +95,17 @@ st.markdown("""
         padding-bottom: 2rem;
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(15, 15, 15, 0.85);
         backdrop-filter: blur(10px);
         border-radius: 20px;
         margin-top: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         animation: containerFloat 10s ease-in-out infinite;
     }
     
     @keyframes containerFloat {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
+        50% { transform: translateY(-3px); }
     }
     
     /* Header section styling */
@@ -102,7 +120,7 @@ st.markdown("""
         to { opacity: 1; transform: translateX(0); }
     }
     
-    /* Title styling - removed glow effect */
+    /* Title styling */
     .main-title {
         color: #ffffff !important;
         font-weight: 700 !important;
@@ -115,18 +133,18 @@ st.markdown("""
     
     .title-icon {
         font-size: 3rem;
-        color: #14b8a6; /* Teal green color */
+        color: #3b82f6; /* Professional blue */
         animation: iconBounce 2s ease-in-out infinite;
     }
     
     @keyframes iconBounce {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
+        50% { transform: translateY(-8px); }
     }
     
-    /* Tagline styling - changed to teal green */
+    /* Tagline styling */
     .tagline {
-        color: #14b8a6 !important; /* Teal green color */
+        color: #60a5fa !important; /* Light blue */
         font-size: 1.3rem !important;
         font-weight: 600 !important;
         margin-bottom: 1rem !important;
@@ -141,7 +159,7 @@ st.markdown("""
     
     /* About section styling */
     .about-section {
-        color: #e0e0e0 !important;
+        color: #d1d5db !important;
         font-size: 1.1rem !important;
         line-height: 1.6 !important;
         margin-bottom: 2rem !important;
@@ -151,6 +169,7 @@ st.markdown("""
     /* Upload section styling */
     .upload-section {
         animation: slideInRight 1s ease-out;
+        margin-top: 3rem;
     }
     
     @keyframes slideInRight {
@@ -158,34 +177,37 @@ st.markdown("""
         to { opacity: 1; transform: translateX(0); }
     }
     
-    /* Enhanced file uploader */
+    /* Enhanced file uploader with solid black background - INCREASED WIDTH */
     .stFileUploader {
-        background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(255, 193, 7, 0.1));
-        border: 2px dashed rgba(20, 184, 166, 0.5);
+        background: #000000 !important;
+        border: 2px dashed rgba(59, 130, 246, 0.4);
         border-radius: 15px;
-        padding: 2rem;
+        padding: 2rem 3rem; /* Increased horizontal padding from 2rem to 3rem */
         text-align: center;
-        margin: 2rem 0;
+        margin: 2.5rem 0;
         transition: all 0.3s ease;
-        animation: pulseGlow 4s ease-in-out infinite;
+        animation: uploadPulse 4s ease-in-out infinite;
+        width: calc(100% + 2cm); /* Increased width by 1cm on each side */
+        margin-left: -1cm; /* Center the wider box */
+        margin-right: -1cm;
     }
     
-    @keyframes pulseGlow {
-        0%, 100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.2); }
-        50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.4); }
+    @keyframes uploadPulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); }
+        50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.25); }
     }
     
     .stFileUploader:hover {
-        border-color: rgba(20, 184, 166, 0.8);
-        background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(255, 193, 7, 0.15));
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+        border-color: rgba(59, 130, 246, 0.7);
+        background: #111111 !important;
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 12px 35px rgba(59, 130, 246, 0.2);
         animation-play-state: paused;
     }
     
     .stFileUploader label {
         color: #ffffff !important;
-        font-size: 1.2rem !important;
+        font-size: 1rem !important;
         font-weight: 500 !important;
         display: flex;
         align-items: center;
@@ -193,37 +215,55 @@ st.markdown("""
         gap: 0.5rem;
     }
     
-    /* Uniform product boxes */
+    /* Smaller Browse Files text */
+    .stFileUploader label div {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Enhanced spacing for columns - Better gaps between product boxes */
+    .stColumns {
+        gap: 3rem !important;
+        margin: 3rem 0 !important;
+    }
+    
+    .stColumns > div {
+        padding: 0 1.5rem !important;
+    }
+    
+    /* Product boxes with solid black background and improved spacing */
     .product-box {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        height: 400px;
+        background: #000000 !important;
+        border: 2px solid rgba(59, 130, 246, 0.2);
+        border-radius: 18px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        height: 420px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         backdrop-filter: blur(10px);
         animation: productFloat 6s ease-in-out infinite;
         position: relative;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
     
     @keyframes productFloat {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-3px); }
+        50% { transform: translateY(-2px); }
     }
     
     .product-box:hover {
         transform: translateY(-10px) scale(1.03);
-        box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3); /* Changed to teal green */
-        border-color: rgba(20, 184, 166, 0.5);
-        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 
+            0 20px 50px rgba(59, 130, 246, 0.25),
+            0 0 30px rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.5);
+        background: #111111 !important;
         animation-play-state: paused;
     }
     
-    /* Updated product header - split layout */
+    /* Product header */
     .product-header {
         display: flex;
         justify-content: space-between;
@@ -241,7 +281,7 @@ st.markdown("""
     }
     
     .similarity-badge-header {
-        background: linear-gradient(135deg, #14b8a6, #059669); /* Teal green gradient */
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
         color: white;
         padding: 0.2rem 0.6rem;
         border-radius: 15px;
@@ -252,24 +292,26 @@ st.markdown("""
     
     .product-box:hover .similarity-badge-header {
         transform: scale(1.05);
-        box-shadow: 0 3px 10px rgba(20, 184, 166, 0.2); /* Reduced glow */
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
     }
     
     .product-image-container {
-        height: 200px;
+        height: 220px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.02);
-        margin-bottom: 1rem;
+        border-radius: 12px;
+        background: #0a0a0a !important;
+        margin-bottom: 1.5rem;
         transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.1);
     }
     
     .product-box:hover .product-image-container {
-        background: rgba(255, 255, 255, 0.05);
-        transform: scale(1.05);
+        background: #1a1a1a !important;
+        transform: scale(1.02);
+        border-color: rgba(59, 130, 246, 0.2);
     }
     
     .product-image-container img {
@@ -286,7 +328,7 @@ st.markdown("""
     }
     
     .price-tag {
-        color: #ffc107;
+        color: #fbbf24;
         font-size: 1.1rem;
         font-weight: 600;
         margin: 0.5rem 0;
@@ -294,21 +336,21 @@ st.markdown("""
     }
     
     .product-box:hover .price-tag {
-        color: #ffeb3b;
+        color: #f59e0b;
         transform: scale(1.05);
     }
     
     .shop-buttons {
         display: flex;
-        gap: 0.5rem;
+        gap: 1.5rem; /* INCREASED gap between Amazon and Flipkart buttons from 0.8rem to 1.5rem */
         justify-content: center;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
     }
     
-    /* Enhanced shop buttons with cool icons and design */
+    /* Enhanced shop buttons */
     .shop-btn {
         color: white !important;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.2rem;
         border-radius: 12px;
         text-decoration: none !important;
         font-size: 0.85rem;
@@ -321,7 +363,7 @@ st.markdown("""
         gap: 0.4rem;
         position: relative;
         overflow: hidden;
-        min-width: 90px;
+        min-width: 100px;
         justify-content: center;
     }
     
@@ -332,7 +374,7 @@ st.markdown("""
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
         transition: left 0.5s;
     }
     
@@ -341,47 +383,47 @@ st.markdown("""
     }
     
     .shop-btn:hover {
-        transform: translateY(-3px) scale(1.05);
+        transform: translateY(-2px) scale(1.05);
         text-decoration: none !important;
         color: white !important;
     }
     
     .shop-btn.amazon {
-        background: linear-gradient(135deg, #ff9900, #ff7700);
-        box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+        background: linear-gradient(135deg, #ff9900, #e68900);
+        box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2);
     }
     
     .shop-btn.amazon:hover {
-        box-shadow: 0 8px 25px rgba(255, 153, 0, 0.5);
-        background: linear-gradient(135deg, #ffaa00, #ff8800);
+        box-shadow: 0 6px 20px rgba(255, 153, 0, 0.35);
+        background: linear-gradient(135deg, #ffaa00, #ff9500);
     }
     
     .shop-btn.flipkart {
-        background: linear-gradient(135deg, #2874f0, #1e60d1);
-        box-shadow: 0 4px 15px rgba(40, 116, 240, 0.3);
+        background: linear-gradient(135deg, #2874f0, #1e5ce6);
+        box-shadow: 0 4px 15px rgba(40, 116, 240, 0.2);
     }
     
     .shop-btn.flipkart:hover {
-        box-shadow: 0 8px 25px rgba(40, 116, 240, 0.5);
-        background: linear-gradient(135deg, #3484ff, #2571ee);
+        box-shadow: 0 6px 20px rgba(40, 116, 240, 0.35);
+        background: linear-gradient(135deg, #3080ff, #2570e8);
     }
     
-    /* Icon styling for buttons */
+    /* Icon styling for buttons - Larger icons for sample product boxes */
     .shop-btn i {
-        font-size: 1rem;
+        font-size: 1.2rem;
         transition: transform 0.3s ease;
     }
     
     .shop-btn:hover i {
-        transform: scale(1.2) rotate(5deg);
+        transform: scale(1.1) rotate(3deg);
     }
     
-    /* Upload preview box */
+    /* Upload preview box with better spacing */
     .upload-preview {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 15px;
-        padding: 1.5rem;
+        padding: 2rem;
         text-align: center;
         backdrop-filter: blur(10px);
         height: 400px;
@@ -391,22 +433,23 @@ st.markdown("""
         align-items: center;
         transition: all 0.3s ease;
         animation: previewFloat 8s ease-in-out infinite;
+        margin-bottom: 2rem;
     }
     
     @keyframes previewFloat {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
+        50% { transform: translateY(-3px); }
     }
     
     .upload-preview:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 15px 35px rgba(20, 184, 166, 0.2);
-        border-color: rgba(20, 184, 166, 0.3);
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.2);
     }
     
     .upload-preview h4 {
         color: #ffffff;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -432,26 +475,35 @@ st.markdown("""
     }
     
     .upload-preview:hover .upload-image-container img {
-        transform: scale(1.05);
-        box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+        transform: scale(1.03);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
     }
     
-    /* Sample products styling - removed horizontal bars */
+    /* Sample products styling - EQUAL HORIZONTAL AND VERTICAL GAPS */
     .sample-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 2rem 2rem; /* MATCHED vertical and horizontal gaps to be equal */
+        margin-top: 3rem;
+        margin-bottom: 3rem;
     }
-    
+
+    /* Sample item styling with enhanced price and button spacing */
     .sample-item {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 0.8rem;
+        background: #000000 !important;
+        border: 2px solid rgba(59, 130, 246, 0.2);
+        border-radius: 18px;
+        padding: 1.5rem;
         text-align: center;
         transition: all 0.3s ease;
         animation: sampleFloat 7s ease-in-out infinite;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        height: 300px; /* Increased height to accommodate larger price */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        margin-bottom: 2rem;
     }
     
     @keyframes sampleFloat {
@@ -460,45 +512,181 @@ st.markdown("""
     }
     
     .sample-item:hover {
-        transform: translateY(-8px) scale(1.05);
-        box-shadow: 0 15px 30px rgba(20, 184, 166, 0.3); /* Changed to teal green */
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(20, 184, 166, 0.3);
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 
+            0 20px 50px rgba(59, 130, 246, 0.25),
+            0 0 30px rgba(59, 130, 246, 0.1);
+        background: #111111 !important;
+        border-color: rgba(59, 130, 246, 0.5);
         animation-play-state: paused;
     }
     
-    /* Remove borders from sample images */
-    .sample-item img {
-        border: none !important;
-        border-radius: 8px;
+    /* Sample item image container */
+    .sample-item-image {
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #0a0a0a !important;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.1);
     }
     
-    /* Icon styling */
-    .icon {
+    .sample-item:hover .sample-item-image {
+        background: #1a1a1a !important;
+        transform: scale(1.02);
+        border-color: rgba(59, 130, 246, 0.2);
+    }
+    
+    .sample-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border: none !important;
+        border-radius: 8px;
         transition: all 0.3s ease;
     }
     
-    .icon:hover {
-        transform: rotate(360deg) scale(1.2);
+    /* Sample item text */
+    .sample-item-text {
+        color: #ffffff;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-top: auto;
+        line-height: 1.3;
     }
+
+    /* ENHANCED PRICE STYLING FOR SAMPLE PRODUCTS */
+    .sample-item .price-tag {
+        color: #fbbf24;
+        font-size: 1.3rem !important; /* INCREASED from 1.1rem to 1.3rem */
+        font-weight: 700 !important; /* INCREASED from 600 to 700 */
+        margin: 0.8rem 0 !important; /* INCREASED margin for better spacing */
+        transition: all 0.3s ease;
+        text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3); /* Added text shadow for emphasis */
+    }
+    
+    .sample-item:hover .price-tag {
+        color: #f59e0b;
+        transform: scale(1.08) !important; /* INCREASED scale on hover */
+        text-shadow: 0 3px 6px rgba(245, 158, 11, 0.4);
+    }
+
+    /* ENHANCED SAMPLE ITEM SHOP BUTTONS - INCREASED GAP */
+    .sample-item .shop-buttons,
+    .sample-product .shop-buttons {
+        display: flex;
+        gap: 2.5rem !important; /* INCREASED gap significantly from 1.5rem to 2.5rem */
+        justify-content: center;
+        margin-top: 1rem !important; /* INCREASED margin top */
+    }
+
+    /* Sample item icons - Enhanced for better visibility */
+    .sample-item .fab,
+    .sample-item .fas {
+        font-size: 1.5rem !important; /* INCREASED from 1.4rem to 1.5rem */
+        transition: transform 0.3s ease;
+        padding: 0.3rem; /* Added padding for better click area */
+    }
+
+    .sample-item:hover .fab,
+    .sample-item:hover .fas {
+        transform: scale(1.15) rotate(3deg); /* Enhanced hover effect */
+    }
+
+    /* Enhanced Amazon icon for sample products */
+    .sample-item .fab.fa-amazon {
+        color: #ff9900 !important;
+        text-shadow: 0 2px 4px rgba(255, 153, 0, 0.3);
+    }
+
+    .sample-item:hover .fab.fa-amazon {
+        color: #ffaa00 !important;
+        text-shadow: 0 3px 6px rgba(255, 170, 0, 0.4);
+    }
+
+    /* Enhanced Flipkart icon for sample products */
+    .sample-item .fas.fa-shopping-cart {
+        color: #2874f0 !important;
+        text-shadow: 0 2px 4px rgba(40, 116, 240, 0.3);
+    }
+
+    .sample-item:hover .fas.fa-shopping-cart {
+        color: #3080ff !important;
+        text-shadow: 0 3px 6px rgba(48, 128, 255, 0.4);
+    }
+
+    /* Trends button styling */
+    .trends-button {
+       display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #000000;
+        color: #FFD700;
+         padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+      border: 2px solid #333333;
+       transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        animation: trendsFloat 3s ease-in-out infinite;
+    cursor: pointer;
+    }
+
+    @keyframes trendsFloat {
+       0%, 100% { transform: translateY(0px); }
+       50% { transform: translateY(-2px); }
+    }
+
+    .trends-button:hover {
+        transform: translateY(-3px) scale(1.05);
+         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        background: #1a1a1a;
+       border-color: #FFD700;
+       text-decoration: none;
+        color: #FFD700;
+    animation-play-state: paused;
+    }
+
+   .trends-button i {
+     font-size: 1.1rem;
+     transition: transform 0.3s ease;
+    }
+
+    .trends-button:hover i {
+       transform: rotate(15deg) scale(1.1);
+       color: #FFD700;
+    }
+    
+
     
     /* Responsive adjustments */
     @media (max-width: 768px) {
+        /* Mobile adjustments for product boxes */
         .stColumns > div {
             width: 100% !important;
-            margin-bottom: 1rem;
+            margin-bottom: 2.5rem;
+            padding: 0 0.5rem !important;
         }
         
         .stColumns {
             flex-direction: column;
+            gap: 2rem !important;
         }
         
         .product-box {
-            height: 350px;
+            height: 380px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
         }
         
         .product-image-container {
-            height: 150px;
+            height: 160px;
         }
         
         .main-title {
@@ -518,31 +706,97 @@ st.markdown("""
         
         .shop-buttons {
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.8rem; /* Reduced gap for mobile vertical layout */
         }
         
         .product-header {
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.5rem;
             align-items: flex-start;
+        }
+        
+        /* Mobile adjustments for description box */
+        .about-section {
+            margin: 2rem 0 !important;
+            padding: 1.5rem 1.8rem !important;
+            font-size: 1.1rem !important;
+        }
+        
+        /* Mobile adjustments for sample items - MAINTAINED EQUAL GAPS */
+        .sample-grid {
+            gap: 1.5rem 1.5rem; /* MAINTAINED equal vertical and horizontal gaps for mobile */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+        
+        .sample-item {
+            height: 260px; /* Adjusted height for mobile */
+            padding: 1rem;
+        }
+        
+        .sample-item-image {
+            height: 130px;
+        }
+        
+        .sample-item-text {
+            font-size: 0.8rem;
+        }
+        
+        /* Mobile sample item price - MAINTAINED larger size */
+        .sample-item .price-tag {
+            font-size: 1.1rem !important; /* Slightly smaller for mobile but still larger than original */
+            margin: 0.6rem 0 !important;
+        }
+        
+        /* Mobile sample item shop buttons - MAINTAINED INCREASED GAP */
+        .sample-item .shop-buttons {
+            gap: 2rem !important; /* MAINTAINED larger gap for mobile */
+        }
+        
+        /* Mobile icon size adjustment - MAINTAINED larger size */
+        .shop-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Mobile sample item icons - MAINTAINED larger size */
+        .sample-item .fab,
+        .sample-item .fas {
+            font-size: 1.3rem !important; /* Slightly smaller for mobile but still enhanced */
+        }
+
+        /* Mobile trends button */
+        .trends-button {
+            font-size: 0.9rem;
+            padding: 0.7rem 1.3rem;
+        }
+        
+        /* Mobile file uploader - Adjust for smaller screens */
+        .stFileUploader {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 2rem;
         }
     }
     
     /* Info and warning styling */
     .stInfo, .stWarning, .stError {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
         border-radius: 10px !important;
         color: #ffffff !important;
         backdrop-filter: blur(10px) !important;
         animation: infoFloat 5s ease-in-out infinite;
+        margin: 1.5rem 0 !important;
     }
     
     @keyframes infoFloat {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-2px); }
+        50% { transform: translateY(-1px); }
     }
 </style>
+            
 """, unsafe_allow_html=True)
 
 # Set device
@@ -787,166 +1041,123 @@ if uploaded_file:
         st.error(f"❌ Failed to process uploaded image: {e}")
 
 else:
-    # Show sample products in enhanced grid - removed the "Upload an image" text
+    # Show sample products in enhanced grid
     if len(image_paths) > 0:
         st.markdown("""
         <div style="text-align: center; margin: 3rem 0;">
-            <h3 style="color: #ffffff; font-weight: 600; margin-bottom: 0.5rem;">
-                <i class="fas fa-star icon" style="color: #14b8a6; margin-right: 0.5rem;"></i>
-                Featured Products
+            <h3 style="color: #ffffff; font-weight: 600; margin-bottom: 1.5rem;">
+                <i class="fas fa-star icon" style="color: #fbbf24; margin-right: 0.5rem;"></i>
+                Explore Our Featured Products
             </h3>
-            <p style="color: #14b8a6; font-size: 1.1rem; font-weight: 500; margin-bottom: 2rem;">
-                Discover our collection of trending items
+            <p style="color: #d1d5db; font-size: 1rem; margin-bottom: 2rem;">
+                Discover trending items across various categories. Upload an image to find similar products!
             </p>
         </div>
         """, unsafe_allow_html=True)
         
-        # Show random sample of 8 products in a 4x2 grid
-        sample_indices = random.sample(range(len(image_paths)), min(8, len(image_paths)))
+        # Display sample products in a grid
+        sample_size = min(8, len(image_paths))  # Show up to 8 sample products
+        sample_indices = random.sample(range(len(image_paths)), sample_size)
         
-        # Create 2 rows of 4 columns each
-        for row in range(2):
-            cols = st.columns(4, gap="medium")
-            for col_idx in range(4):
-                sample_idx = row * 4 + col_idx
-                if sample_idx < len(sample_indices):
-                    idx = sample_indices[sample_idx]
+        # Create responsive grid layout
+        num_cols = 4
+        rows = (sample_size + num_cols - 1) // num_cols
+        
+        for row in range(rows):
+            cols = st.columns(num_cols, gap="medium")
+            for col_idx in range(num_cols):
+                sample_idx = row * num_cols + col_idx
+                if sample_idx < sample_size:
+                    actual_idx = sample_indices[sample_idx]
                     with cols[col_idx]:
-                        img_path = image_paths[idx]
+                        img_path = image_paths[actual_idx]
                         price, amazon_url, flipkart_url = generate_product_info(img_path)
                         
                         # Get base64 encoded image
                         img_base64 = image_to_base64(img_path)
-                        product_name = os.path.basename(img_path).replace('.jpg', '').replace('.png', '').replace('.jpeg', '').replace('_', ' ').title()
                         
-                        # Create sample product item
+                        # Create sample product card
                         st.markdown(f"""
                         <div class="sample-item">
                             <div style="height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
                                 <img src="data:image/jpeg;base64,{img_base64}" 
-                                     alt="{product_name}" 
+                                     alt="Sample Product" 
                                      style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
                             </div>
-                            <div style="color: #ffffff; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem;">
-                                {product_name[:20]}{'...' if len(product_name) > 20 else ''}
-                            </div>
-                            <div style="color: #ffc107; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">
-                                ₹{price:,}
-                            </div>
-                            <div style="display: flex; gap: 0.3rem; justify-content: center;">
-                                <a href="{amazon_url}" target="_blank" 
-                                   style="background: linear-gradient(135deg, #ff9900, #ff7700); color: white; 
-                                          padding: 0.3rem 0.6rem; border-radius: 8px; text-decoration: none; 
-                                          font-size: 0.7rem; font-weight: 600; transition: all 0.3s ease;
-                                          display: flex; align-items: center; gap: 0.2rem;">
-                                    <i class="fab fa-amazon" style="font-size: 0.8rem;"></i> Shop
+                            <div style="color: #fbbf24; font-weight: 600; font-size: 0.9rem;">₹{price:,}</div>
+                            <div style="display: flex; gap: 0.3rem; justify-content: center; margin-top: 0.5rem;">
+                                <a href="{amazon_url}" target="_blank" style="color: #ff9900; text-decoration: none; font-size: 0.7rem;">
+                                    <i class="fab fa-amazon"></i>
                                 </a>
-                                <a href="{flipkart_url}" target="_blank" 
-                                   style="background: linear-gradient(135deg, #2874f0, #1e60d1); color: white; 
-                                          padding: 0.3rem 0.6rem; border-radius: 8px; text-decoration: none; 
-                                          font-size: 0.7rem; font-weight: 600; transition: all 0.3s ease;
-                                          display: flex; align-items: center; gap: 0.2rem;">
-                                    <i class="fas fa-shopping-cart" style="font-size: 0.8rem;"></i> Buy
+                                <a href="{flipkart_url}" target="_blank" style="color: #2874f0; text-decoration: none; font-size: 0.7rem;">
+                                    <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
                         </div>
                         """, unsafe_allow_html=True)
-
-# Add some spacing before footer
-st.markdown("<div style='height: 3rem;'></div>", unsafe_allow_html=True)
-
-# Instructions section
-st.markdown("""
-<div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 2rem; margin: 2rem 0; 
-            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
-    <h4 style="color: #14b8a6; font-weight: 600; margin-bottom: 1rem; text-align: center;">
-        <i class="fas fa-lightbulb icon" style="margin-right: 0.5rem;"></i>
-        How to Use Pic2Pick
-    </h4>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-        <div style="text-align: center; color: #e0e0e0;">
-            <div style="background: rgba(20, 184, 166, 0.1); border-radius: 50%; width: 60px; height: 60px; 
-                        display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                <i class="fas fa-camera" style="font-size: 1.5rem; color: #14b8a6;"></i>
-            </div>
-            <h5 style="color: #ffffff; margin-bottom: 0.5rem;">1. Upload Image</h5>
-            <p style="font-size: 0.9rem; line-height: 1.4;">Take or upload a clear photo of the product you want to find</p>
-        </div>
-        <div style="text-align: center; color: #e0e0e0;">
-            <div style="background: rgba(20, 184, 166, 0.1); border-radius: 50%; width: 60px; height: 60px; 
-                        display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                <i class="fas fa-magic" style="font-size: 1.5rem; color: #14b8a6;"></i>
-            </div>
-            <h5 style="color: #ffffff; margin-bottom: 0.5rem;">2. AI Analysis</h5>
-            <p style="font-size: 0.9rem; line-height: 1.4;">Our AI analyzes your image and finds visually similar products</p>
-        </div>
-        <div style="text-align: center; color: #e0e0e0;">
-            <div style="background: rgba(20, 184, 166, 0.1); border-radius: 50%; width: 60px; height: 60px; 
-                        display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                <i class="fas fa-shopping-bag" style="font-size: 1.5rem; color: #14b8a6;"></i>
-            </div>
-            <h5 style="color: #ffffff; margin-bottom: 0.5rem;">3. Shop & Buy</h5>
-            <p style="font-size: 0.9rem; line-height: 1.4;">Browse recommendations and shop directly from Amazon or Flipkart</p>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# Add footer
-render_footer()
-
-# Add some JavaScript for enhanced interactions
-st.markdown("""
-<script>
-// Add smooth scrolling for better UX
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Add loading animation for file upload
-const fileUploader = document.querySelector('.stFileUploader');
-if (fileUploader) {
-    fileUploader.addEventListener('change', function() {
-        const loader = document.createElement('div');
-        loader.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing your image...';
-        loader.style.cssText = `
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 1rem 2rem;
-            border-radius: 10px; z-index: 9999; font-size: 1.1rem;
-        `;
-        document.body.appendChild(loader);
         
-        setTimeout(() => {
-            if (document.body.contains(loader)) {
-                document.body.removeChild(loader);
-            }
-        }, 3000);
-    });
-}
+        # Call to action section
+        st.markdown("""
+        <div style="text-align: center; margin: 3rem 0 2rem 0;">
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); 
+                        border-radius: 15px; padding: 2rem; backdrop-filter: blur(10px);">
+                <h4 style="color: #ffffff; margin-bottom: 1rem; font-weight: 600;">
+                    <i class="fas fa-magic icon" style="color: #3b82f6; margin-right: 0.5rem;"></i>
+                    Ready to Find Your Perfect Match?
+                </h4>
+                <p style="color: #d1d5db; margin-bottom: 1.5rem;">
+                    Upload an image of any product you like, and our AI will instantly find visually similar items from our catalog.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: 0.8rem 1.2rem; border-radius: 10px; 
+                                border: 1px solid rgba(34, 197, 94, 0.2);">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-right: 0.5rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">AI-Powered Matching</span>
+                    </div>
+                    <div style="background: rgba(168, 85, 247, 0.1); padding: 0.8rem 1.2rem; border-radius: 10px; 
+                                border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <i class="fas fa-bolt" style="color: #a855f7; margin-right: 0.5rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">Instant Results</span>
+                    </div>
+                    <div style="background: rgba(249, 115, 22, 0.1); padding: 0.8rem 1.2rem; border-radius: 10px; 
+                                border: 1px solid rgba(249, 115, 22, 0.2);">
+                        <i class="fas fa-shopping-bag" style="color: #f97316; margin-right: 0.5rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">Direct Shopping Links</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    else:
+        # Fallback when no images are available
+        st.markdown("""
+        <div style="text-align: center; margin: 4rem 0;">
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); 
+                        border-radius: 15px; padding: 3rem; backdrop-filter: blur(10px);">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                <h3 style="color: #ffffff; margin-bottom: 1rem;">No Product Images Found</h3>
+                <p style="color: #d1d5db; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    To use Pic2Pick, you need to set up a product catalog first. Follow these simple steps:
+                </p>
+                <div style="text-align: left; max-width: 500px; margin: 0 auto;">
+                    <div style="background: rgba(255, 255, 255, 0.04); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <strong style="color: #3b82f6;">Step 1:</strong> 
+                        <span style="color: #d1d5db;">Create a folder named 'product_images' in your project directory</span>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.04); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <strong style="color: #3b82f6;">Step 2:</strong> 
+                        <span style="color: #d1d5db;">Add product images (.jpg, .jpeg, .png) to this folder</span>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.04); padding: 1rem; border-radius: 10px;">
+                        <strong style="color: #3b82f6;">Step 3:</strong> 
+                        <span style="color: #d1d5db;">Restart the application to load your product catalog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-// Add parallax effect to background
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    document.querySelector('.stApp').style.transform = `translateY(${rate}px)`;
-});
 
-// Add hover sound effect (optional - can be removed if not needed)
-const buttons = document.querySelectorAll('.shop-btn, .sample-item');
-buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        // Subtle scale effect on hover
-        button.style.transform = 'scale(1.05)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'scale(1)';
-    });
-});
-</script>
-""", unsafe_allow_html=True)
+# Render footer component
+render_footer()
