@@ -1,7 +1,8 @@
 streamlit
-torch
+torch==2.0.1
 torchvision
-faiss-cpu
 Pillow
 numpy
 scikit-learn
+faiss-cpu
+git+https://github.com/openai/CLIP.git
