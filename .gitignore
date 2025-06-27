@@ -1,0 +1,14 @@
+# Ignore venv, model caches, and large data
+venv/
+__pycache__/
+*.pyc
+*.npy
+*.pt
+*.pkl
+data/*.npy
+
+
+# Streamlit and OS junk
+.streamlit/
+.DS_Store
+Thumbs.db
