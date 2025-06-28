@@ -18,8 +18,9 @@ model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 # Load category -> URLs
-with open("data/image_urls.json", "r") as f:
+with open("data/valid_image_urls.json", "r") as f:
     category_to_urls = json.load(f)
+
 
 # Upload or URL
 option = st.radio("Choose input method:", ["Upload an Image", "Paste Image URL"])
