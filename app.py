@@ -1563,7 +1563,57 @@ a.shop-btn {
             border-width: 3px;
         }
     }
-            
+    # Essential CSS for basic styling
+
+/* Disable text selection and link behavior */
+* {
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   text-decoration: none !important;
+}
+
+a, a:hover, a:visited, a:active {
+   color: inherit !important;
+   text-decoration: none !important;
+   pointer-events: none !important;
+}
+
+.product-box:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+   transition: all 0.3s ease;
+}
+
+/* Hover effects for How it Works cards */
+.work-step:hover {
+   transform: translateY(-8px) scale(1.02);
+   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+   transition: all 0.3s ease;
+}
+
+/* Hover effects for Technology cards */
+.tech-item:hover {
+   transform: translateY(-5px);
+   transition: all 0.3s ease;
+}
+
+.tech-item:hover i {
+   transform: scale(1.2);
+   transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+   .main-title {
+       font-size: 2.5rem !important;
+   }
+   
+   .tagline {
+       font-size: 1rem !important;
+   }
+}        
             
 </style>
 
@@ -2018,60 +2068,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Essential CSS for basic styling
-st.markdown("""
-<style>
-/* Disable text selection and link behavior */
-* {
-   -webkit-user-select: none;
-   -moz-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
-   text-decoration: none !important;
-}
 
-a, a:hover, a:visited, a:active {
-   color: inherit !important;
-   text-decoration: none !important;
-   pointer-events: none !important;
-}
-
-.product-box:hover {
-   transform: translateY(-5px);
-   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-   transition: all 0.3s ease;
-}
-
-/* Hover effects for How it Works cards */
-.work-step:hover {
-   transform: translateY(-8px) scale(1.02);
-   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-   transition: all 0.3s ease;
-}
-
-/* Hover effects for Technology cards */
-.tech-item:hover {
-   transform: translateY(-5px);
-   transition: all 0.3s ease;
-}
-
-.tech-item:hover i {
-   transform: scale(1.2);
-   transition: all 0.3s ease;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-   .main-title {
-       font-size: 2.5rem !important;
-   }
-   
-   .tagline {
-       font-size: 1rem !important;
-   }
-}
-</style>
-""", unsafe_allow_html=True)           
+          
 
 # Footer
 st.markdown("""
