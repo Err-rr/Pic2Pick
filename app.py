@@ -54,13 +54,9 @@ st.markdown("""
         width: 100% !important;
     }
 
-    /* Main app background with Unsplash image only */
+    /* Deep blue background with white dots */
     .stApp {
-        background: url('https://images.unsplash.com/photo-1554176259-aa961fc32671?q=80&w=2018&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
+        background: #053336;
         font-family: 'Inter', sans-serif;
         position: relative;
         overflow-x: hidden !important;
@@ -69,11 +65,27 @@ st.markdown("""
         min-height: 100vh;
     }
 
+    /* White dots pattern - static */
+    .stApp::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.9) 0.5px, rgba(255, 255, 255, 0.3) 1px, transparent 1.5px);
+        background-size: 30px 30px;
+        opacity: 0.6;
+        z-index: -1;
+    }
+
     /* Ensure Streamlit content appears above background */
     .stApp > div {
         position: relative;
         z-index: 1;
     }
+
     
     /* Main container adjustments */
     .main .block-container {
@@ -419,65 +431,246 @@ st.markdown("""
         filter: brightness(1.2);
     }
     
-    /* Shop buttons - simplified hover effects */
+/* Shop buttons - Fixed for proper clickability */
+.shop-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    z-index: 50;
+    position: relative;
+    /* Ensure this container doesn't block clicks */
+    pointer-events: none;
+}
+
+/* Debug styles - add these temporarily to test */
+.shop-btn {
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer !important;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.2;
+    position: relative;
+    overflow: visible;
+    min-width: 90px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: auto !important;
+    user-select: none;
+    z-index: 100 !important;
+    transform-style: flat;
+    /* Force dimensions */
+    width: auto !important;
+    height: auto !important;
+    min-height: 32px;
+}
+
+/* Remove problematic pseudo-elements that block clicks */
+.shop-btn::before,
+.shop-btn::after {
+    display: none !important; /* Completely disable pseudo-elements */
+}
+
+/* Ensure hover states work properly */
+.shop-btn:hover,
+.shop-btn:focus,
+.shop-btn:active {
+    transform: translateY(-2px) !important;
+    text-decoration: none !important;
+    color: white !important;
+    outline: none;
+    z-index: 101;
+}
+
+.shop-btn:visited {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+/* Amazon button styles */
+.shop-btn.amazon {
+    background: linear-gradient(135deg, #ff9900, #e68900) !important;
+}
+
+.shop-btn.amazon:hover,
+.shop-btn.amazon:focus {
+    background: linear-gradient(135deg, #ffaa00, #ff9500) !important;
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
+}
+
+.shop-btn.amazon:active {
+    transform: translateY(0px) !important;
+    background: linear-gradient(135deg, #e68900, #cc7700) !important;
+}
+
+/* Flipkart button styles */
+.shop-btn.flipkart {
+    background: linear-gradient(135deg, #2874f0, #1e5ce6) !important;
+}
+
+.shop-btn.flipkart:hover,
+.shop-btn.flipkart:focus {
+    background: linear-gradient(135deg, #3080ff, #2570e8) !important;
+    box-shadow: 0 4px 15px rgba(40, 116, 240, 0.4);
+}
+
+.shop-btn.flipkart:active {
+    transform: translateY(0px) !important;
+    background: linear-gradient(135deg, #1e5ce6, #1a4db8) !important;
+}
+
+/* Icon styles - simplified */
+.shop-btn i {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    pointer-events: none; /* Prevent icon from interfering with clicks */
+}
+
+/* Product box adjustments to prevent interference */
+.product-box {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(15px);
+    animation: productFloat 8s ease-in-out infinite;
+    position: relative;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible; /* Changed from hidden to visible */
+    z-index: 1; /* Lower z-index than buttons */
+}
+
+/* Remove problematic pseudo-element from product box */
+.product-box::before {
+    display: none !important;
+}
+
+/* Product info container - ensure it doesn't block clicks */
+.product-info {
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+    /* Allow clicks to pass through to children */
+    pointer-events: none;
+}
+
+/* Re-enable pointer events for interactive elements */
+.product-info .price-tag {
+    pointer-events: none;
+}
+
+.product-info .shop-buttons {
+    pointer-events: none;
+}
+
+.product-info .shop-btn {
+    pointer-events: auto !important;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
     .shop-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 50;
     }
     
     .shop-btn {
-        color: white !important;
-        padding: 0.5rem 1rem !important;
-        border-radius: 12px !important;
-        text-decoration: none !important;
-        font-size: 0.8rem !important;
-        font-weight: 700;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem !important;
-        position: relative;
-        overflow: hidden;
-        min-width: 90px !important;
-        justify-content: center;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        width: 200px;
+        padding: 0.75rem 1rem;
+        display: block;
+        text-align: center;
     }
-    
-    .shop-btn:hover {
-        transform: translateY(-2px);
-        text-decoration: none !important;
-        color: white !important;
-    }
-    
-    .shop-btn.amazon {
-        background: linear-gradient(135deg, #ff9900, #e68900);
-    }
-    
-    .shop-btn.amazon:hover {
-        background: linear-gradient(135deg, #ffaa00, #ff9500);
-    }
-    
-    .shop-btn.flipkart {
-        background: linear-gradient(135deg, #2874f0, #1e5ce6);
-    }
-    
-    .shop-btn.flipkart:hover {
-        background: linear-gradient(135deg, #3080ff, #2570e8);
-    }
-    
-    .shop-btn i {
-        font-size: 1.1rem !important;
-        transition: transform 0.3s ease;
-    }
-    
-    .shop-btn:hover i {
-        transform: scale(1.1);
-    }
+}
+
+/* Additional fixes for Streamlit markdown containers */
+.stMarkdown {
+    pointer-events: none !important;
+}
+
+.stMarkdown * {
+    pointer-events: auto;
+}
+
+.stMarkdown .product-box {
+    pointer-events: auto;
+}
+
+.stMarkdown .product-info {
+    pointer-events: none;
+}
+
+.stMarkdown .shop-buttons {
+    pointer-events: none;
+}
+
+.stMarkdown .shop-btn {
+    pointer-events: auto !important;
+}
+
+/* Specific fix for nested anchor tags in Streamlit */
+div[data-testid="stMarkdownContainer"] .shop-btn {
+    pointer-events: auto !important;
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 999 !important;
+}
+
+/* Ensure Streamlit containers don't interfere */
+.element-container {
+    pointer-events: auto !important;
+}
+
+.element-container .product-box {
+    pointer-events: auto;
+}
+
+.element-container .product-info {
+    pointer-events: none;
+}
+
+.element-container .shop-btn {
+    pointer-events: auto !important;
+}
+
+/* Ensure no global styles are interfering */
+a.shop-btn {
+    pointer-events: auto !important;
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* Remove any conflicting styles */
+.enhanced-btn::after {
+    display: none !important;
+}
+
+.neon-glow::before {
+    pointer-events: none !important;
+}
     
     /* Upload preview box */
     .upload-preview {
