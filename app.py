@@ -1678,11 +1678,18 @@ def calculate_color_similarity(img1, img2):
 def generate_product_info(category):
     """Generate mock price and shopping URLs"""
     category_prices = {
-        "clothing": (800, 3000),
-        "shoes": (1500, 8000),
-        "electronics": (5000, 50000),
-        "furniture": (2000, 25000),
-        "accessories": (500, 5000)
+        "blazzer": (1800, 3000),
+        "copies": (80,250),
+        "hillsandal": (500, 1400),
+        "menshirt": (500, 900),
+        "schoolbag": (400, 900),
+        "shoe": (800, 1500),
+        "sofa": (2800, 4500),
+        "suitsalwar": (400, 900),
+        "tops": (500, 1500),
+        "trolley": (1800, 2500),
+        "watch": (800, 1500)
+
     }
     
     price_range = category_prices.get(category.lower(), (500, 5000))

@@ -3,15 +3,90 @@
   "sofa": [
     "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017726/Sofa3_stlmwe.jpg",
     "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017725/sofa1_ouxh47.jpg",
-    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017722/Sofa2_ay1ftz.jpg"
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017722/Sofa2_ay1ftz.jpg",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017717/download_1_bk9ex2.jpg",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751266511/sofa5_dkerh0.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751266510/sofa6_oqzvqx.webp"
   ],
-  "men_suit": [
+  "blazzer": [
     "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017726/ManSuit2_p9vuhc.jpg",
     "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017723/ManSuit_gt6l5i.jpg",
-    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017717/suit4_quuvz5.jpg"
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017717/suit4_quuvz5.jpg",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017716/suit3_cloljn.jpg",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267414/blazzer_zmyuwy.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267421/blazzer2_xm6z3l.webp"
   ],
   "shoe": [
-   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017717/shoe_n2zf6l.jpg"
-
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751017717/shoe_n2zf6l.jpg",
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267619/shoe6_xmieak.webp",
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267620/shoe4_ps90rm.webp",
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267653/shoe3_bzhqkk.webp",
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267654/10-615-navy-boldness-navy-original-imaghntphnvfgutq_wzg7id.webp",
+   "https://res.cloudinary.com/dm6s07nls/image/upload/v1751267671/shoe5_pm3eva.webp"
+  ],
+  "watch":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751265451/-original-imagy97z4qgjheyn_jk7oax.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268460/watch2_kzbddr.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268457/watch3_ui1y9k.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268455/watch4_z00cg8.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268452/watch5_lxsz6y.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268448/watch6_imrquy.webp"
+  ],
+  "schoolbag":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268999/schholbag1_fxxugz.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268997/schholbag2_zergfv.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268992/schoolbag3_m0tquq.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268986/schoolbag4_aakggi.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268985/schoolbag5_uxlbmf.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751268960/schoolbag6_ythalv.webp"
+  ],
+  "copies":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269315/copies1_c4vobu.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269312/copies2_eqokdg.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269311/copies3_oy5zxk.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269307/copies4_lq4dym.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269305/copies5_dxndd4.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269305/copies6_uikkpv.webp"
+  ],
+  "suitsalwar":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269650/suitsalwar1_bclmpz.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269650/suitsalwar5_av00vi.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269649/suitsalwar3_t7pfyv.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269649/suitsalwar2_dta3rt.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269649/suitsalwar4_xr5mlw.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751269649/suitsalwar6_ebow6x.webp"
+  ],
+  "menshirt":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270342/menshirt1_kh0xoj.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270342/menshirt2_t5lcba.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270342/menshirt3_qio6tg.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270342/menshirt4_dd2xjx.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270342/menshirt6_lsqaa5.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270341/menshirt5_i5j4k4.webp"
+  ],
+  "trolley":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270738/trolley1_tgyoi0.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270738/trolley2_uhyeq3.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270738/trolley3_ptmwfc.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270737/trolley4_bf837b.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270738/trolley6_ydzc2q.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751270737/trolley5_m4hyp1.webp"
+  ],
+  "hillsandal":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal1_v7fuzl.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal3_gwr0k6.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal4_srifto.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal5_qc9yp2.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal2_uv0jje.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271239/hillsandal6_xbzwob.webp"
+  ],
+  "tops":[
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271723/tops7_rwpslh.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271635/tops4_wpdjm6.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271635/tops2_sdx9zr.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271635/tops3_s6ovji.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271634/tops6_dmadkn.webp",
+    "https://res.cloudinary.com/dm6s07nls/image/upload/v1751271634/tops5_zqlex9.webp"
   ]
+  
 }
