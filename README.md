@@ -79,7 +79,7 @@ streamlit run app.py
 
 ## 👤 Author
 
-Built with ❤️ by Shivam Kumar
+Made by Shivam Kumar with ❤️ 
 
 > "See It. Snap It. Get It."
 
