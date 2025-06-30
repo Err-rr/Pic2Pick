@@ -1615,7 +1615,7 @@ a, a:hover, a:visited, a:active {
    }
 }        
             
-</style>
+            </style>
 
 """, unsafe_allow_html=True)
 
@@ -1637,6 +1637,42 @@ def url_to_base64(url):
     except Exception as e:
         print(f"Error loading image from URL {url}: {e}")
         return ""
+
+# Function to extract dominant colors from image
+def get_dominant_colors(image, num_colors=3):
+    """Extract dominant colors from PIL Image using simple method"""
+    try:
+        # Resize image for faster processing
+        image = image.resize((50, 50))
+        # Convert to numpy array
+        img_array = np.array(image)
+        # Get average color of the image
+        avg_color = np.mean(img_array.reshape(-1, 3), axis=0)
+        return avg_color
+    except:
+        return np.array([128, 128, 128])  # Default gray
+
+# Function to calculate color similarity
+def calculate_color_similarity(img1, img2):
+    """Calculate similarity between two images based on dominant colors"""
+    try:
+        color1 = get_dominant_colors(img1)
+        color2 = get_dominant_colors(img2)
+        
+        # Calculate Euclidean distance between average colors
+        distance = np.sqrt(np.sum((color1 - color2) ** 2))
+        
+        # Convert distance to similarity (max distance for RGB is ~441)
+        # Normalize to 0-1 range, then convert to percentage
+        similarity = 1.0 - (distance / 441.0)
+        
+        # Ensure similarity is in reasonable range
+        similarity = max(0.3, min(0.95, similarity))
+        
+        return similarity
+    except Exception as e:
+        # Fallback to decreasing similarity pattern
+        return max(0.5, 0.9 - (shown_count * 0.05))
 
 # Function to generate mock product info
 def generate_product_info(category):
@@ -1856,13 +1892,15 @@ if image and category_to_urls:
                             
                         # Find next unique URL
                         found_url = None
-                        for idx in I[0]:
+                        distance_for_similarity = None
+                        for i, idx in enumerate(I[0]):
                             if idx >= len(best_urls):
                                 continue
                             url = best_urls[idx]
                             if url not in shown_urls:
                                 shown_urls.add(url)
                                 found_url = url
+                                distance_for_similarity = D[0][i]
                                 break
                         
                         if found_url:
@@ -1877,8 +1915,12 @@ if image and category_to_urls:
                                     # Generate product info
                                     price, amazon_url, flipkart_url = generate_product_info(best_category)
                                     
-                                    # Calculate similarity (mock calculation)
-                                    similarity = 1 - (D[0][shown_count] / 2)  # Normalize to percentage
+                                    # Calculate similarity based on color analysis
+                                    try:
+                                        similarity = calculate_color_similarity(image, url_image)
+                                    except:
+                                        # Simple fallback based on position
+                                        similarity = max(0.5, 0.9 - (shown_count * 0.05))
                                     
                                     # Create product box
                                     st.markdown(f"""
@@ -1978,7 +2020,6 @@ else:
                                     </div>
                                 </div>
                                 """, unsafe_allow_html=True)
-
 
 # How it works section - Black glass background
 st.markdown("""
